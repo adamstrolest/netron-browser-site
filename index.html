@@ -69,11 +69,17 @@ sudo dpkg -i netron-browser_1.7.0_all.deb</code>
 cd netron-browser-site/src<br>
 sudo apt install python3-gi gir1.2-webkit2-4.1 gir1.2-gtk-3.0 gir1.2-pango-1.0 gir1.2-gdkpixbuf-2.0 gir1.2-notify-0.7 yt-dlp mpv<br>
 python3 netron.py</code>
-<div style="margin-top:2rem;padding:1rem;background:#fff3cd;border-radius:8px;font-size:.9rem">
-<strong>Arch Linux & Fedora:</strong> PKGBUILD and RPM spec are ready in <code>packaging/</code>.
-Run your own build, or wait for AUR / COPR publishing.
-<a href="https://github.com/adamstrolest/netron-browser-site/tree/main/packaging" style="color:#856404">View packaging files →</a>
 </div>
+
+<div class="container" id="arch">
+<h2 class="section-title">Arch Linux</h2>
+<p style="text-align:center;margin-bottom:1.5rem">Add to <code>/etc/pacman.conf</code>:</p>
+<code>[netron-browser]<br>Server = https://adamstrolest.github.io/netron-browser-apt/arch/$arch<br><br>sudo pacman -Sy netron-browser</code>
+</div>
+
+<div class="container" id="fedora">
+<h2 class="section-title">Fedora</h2>
+<p style="text-align:center;margin-top:1.5rem;opacity:.8">COPR publishing pending. Download RPM from <a href="https://github.com/adamstrolest/netron-browser-site/tree/main/packaging/fedora">packaging/fedora/</a> for now.</p>
 </div>
 
 <footer>
