@@ -1,0 +1,57 @@
+# Maintainer: Adam <adam@example.com>
+# Contributor: Your Name <you@example.com>
+
+pkgname=netron-browser
+pkgver=1.7.0
+pkgrel=1
+pkgdesc="Lightweight WebKitGTK browser with yt-dlp YouTube integration"
+arch=('any')
+url="https://adamstrolest.github.io/netron-browser-site/"
+license=('GPL3')
+depends=(
+    'python'
+    'python-gobject'
+    'webkit2gtk'
+    'gtk3'
+    'python-cairo'
+    'yt-dlp'
+    'mpv'
+    'xdg-utils'
+)
+makedepends=('librsvg')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/adamstrolest/netron-browser-site/archive/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+package() {
+    cd "$srcdir/$pkgname-$pkgver"
+
+    # Python sources
+    install -Dm644 src/browser.py  "$pkgdir/usr/share/netron-browser/browser.py"
+    install -Dm644 src/dialogs.py  "$pkgdir/usr/share/netron-browser/dialogs.py"
+    install -Dm644 src/interceptors.py "$pkgdir/usr/share/netron-browser/interceptors.py"
+    install -Dm644 src/netron.py    "$pkgdir/usr/share/netron-browser/netron.py"
+    install -Dm644 src/persistence.py "$pkgdir/usr/share/netron-browser/persistence.py"
+    install -Dm755 src/run.sh       "$pkgdir/usr/share/netron-browser/run.sh"
+
+    # Wrapper
+    install -Dm755 /dev/stdin "$pkgdir/usr/bin/netron-browser" <<'WRAPPER'
+#!/bin/sh
+exec /usr/bin/python3 /usr/share/netron-browser/netron.py "$@"
+WRAPPER
+
+    # Desktop file
+    install -Dm644 packaging/common/netron-browser.desktop \
+        "$pkgdir/usr/share/applications/netron-browser.desktop"
+
+    # Icons
+    install -Dm644 packaging/common/netron-browser.svg \
+        "$pkgdir/usr/share/icons/hicolor/scalable/apps/netron-browser.svg"
+    install -Dm644 packaging/common/netron-browser.png \
+        "$pkgdir/usr/share/pixmaps/netron-browser.png"
+
+    # Generate PNG icons from SVG at standard sizes
+    for size in 16 22 24 32 48 64 96 128 256; do
+        rsvg-convert -w "$size" -h "$size" packaging/common/netron-browser.svg \
+            -o "$pkgdir/usr/share/icons/hicolor/${size}x${size}/apps/netron-browser.png"
+    done
+}
