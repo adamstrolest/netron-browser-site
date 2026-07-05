@@ -11,7 +11,7 @@ license=('GPL3')
 depends=(
     'python'
     'python-gobject'
-    'webkit2gtk'
+    'webkit2gtk-4.1'
     'gtk3'
     'python-cairo'
     'yt-dlp'
@@ -23,7 +23,7 @@ source=("$pkgname-$pkgver.tar.gz::https://github.com/adamstrolest/netron-browser
 sha256sums=('SKIP')
 
 package() {
-    cd "$srcdir/$pkgname-$pkgver"
+    cd "$srcdir/netron-browser-site-$pkgver"
 
     # Python sources
     install -Dm644 src/browser.py  "$pkgdir/usr/share/netron-browser/browser.py"
@@ -51,7 +51,9 @@ WRAPPER
 
     # Generate PNG icons from SVG at standard sizes
     for size in 16 22 24 32 48 64 96 128 256; do
+        dir="$pkgdir/usr/share/icons/hicolor/${size}x${size}/apps"
+        mkdir -p "$dir"
         rsvg-convert -w "$size" -h "$size" packaging/common/netron-browser.svg \
-            -o "$pkgdir/usr/share/icons/hicolor/${size}x${size}/apps/netron-browser.png"
+            -o "$dir/netron-browser.png"
     done
 }
