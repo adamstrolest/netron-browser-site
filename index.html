@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Netron Browser</title>
+<meta name="description" content="Netron Browser — lightweight WebKitGTK browser for low-end machines with yt-dlp YouTube integration">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --blue: #4a90d9; --dark: #1a1a2e; --gray: #f5f5f5; --text: #333; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; color: var(--text); line-height: 1.6; }
+.hero { background: linear-gradient(135deg, var(--dark), #16213e); color: #fff; padding: 4rem 1rem; text-align: center; }
+.hero img { width: 80px; height: 80px; margin-bottom: 1rem; }
+.hero h1 { font-size: 2.5rem; margin-bottom: .5rem; }
+.hero p { font-size: 1.1rem; opacity: .85; max-width: 600px; margin: 0 auto; }
+.btn { display: inline-block; padding: .75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; margin: .5rem; transition: background .2s; }
+.btn-primary { background: var(--blue); color: #fff; }
+.btn-primary:hover { background: #357abd; }
+.btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.5); }
+.btn-outline:hover { border-color: #fff; }
+.container { max-width: 960px; margin: 0 auto; padding: 2rem 1rem; }
+.section-title { text-align: center; font-size: 1.8rem; margin-bottom: 2rem; color: var(--dark); }
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+.feature { background: var(--gray); border-radius: 8px; padding: 1.5rem; }
+.feature h3 { margin-bottom: .5rem; color: var(--dark); }
+.feature p { font-size: .95rem; opacity: .8; }
+.install { background: var(--gray); }
+.install code { display: block; background: #e0e0e0; padding: .8rem 1rem; border-radius: 6px; margin: .5rem 0; font-size: .9rem; }
+footer { text-align: center; padding: 2rem; font-size: .85rem; opacity: .6; }
+@media (max-width: 600px) { .hero h1 { font-size: 1.8rem; } }
+</style>
+</head>
+<body>
+<section class="hero">
+<img src="icon.svg" alt="Netron Browser logo">
+<h1>Netron Browser</h1>
+<p>A lightweight WebKitGTK browser for the lowest-end machines you own.</p>
+<div style="margin-top:2rem">
+<a class="btn btn-primary" href="#install">Install Now</a>
+<a class="btn btn-outline" href="https://github.com/adamstrolest/netron-browser-site" target="_blank">View on GitHub</a>
+</div>
+</section>
+
+<div class="container">
+<h2 class="section-title">Why Netron?</h2>
+<div class="features">
+<div class="feature"><h3>⚡ Designed for 32-bit / 1GB RAM</h3><p>Runs smoothly on single-core CPUs with 1 GB RAM. No Electron, no Chrome — pure WebKitGTK + Python.</p></div>
+<div class="feature"><h3>📺 YouTube at 5% CPU</h3><p>Redirects YouTube to yt-dlp + mpv. Video plays at ~5% CPU instead of pegging your machine.</p></div>
+<div class="feature"><h3>🔒 Privacy First</h3><p>Per-site cookie control, private browsing mode, WebGL/WebAudio/media-stream toggles, clear-on-exit.</p></div>
+<div class="feature"><h3>📂 Tabbed + Session Restore</h3><p>Full tab management, bookmarks, history, per-site zoom, and session restore after crashes.</p></div>
+<div class="feature"><h3>🎨 Themes + Custom New Tab</h3><p>Apply CSS themes, set custom background images on new tab pages, switch User Agents.</p></div>
+<div class="feature"><h3>📥 Chrome-Style Downloads</h3><p>Bottom shelf download bar with progress, cancel, and "Open folder" — all in a compact GTK widget.</p></div>
+</div>
+</div>
+
+<div class="container install" id="install">
+<h2 class="section-title">Installation</h2>
+<p style="text-align:center;margin-bottom:1.5rem">Debian / Ubuntu / Raspberry Pi OS and derivatives.</p>
+<h3>Option 1: APT Repository (recommended)</h3>
+<code>echo "deb [signed-by=/usr/share/keyrings/netron-browser.gpg] https://adamstrolest.github.io/netron-browser-apt stable main" | sudo tee /etc/apt/sources.list.d/netron-browser.list<br>
+sudo apt update && sudo apt install netron-browser</code>
+
+<h3 style="margin-top:1.5rem">Option 2: Direct .deb download</h3>
+<code>wget https://github.com/adamstrolest/netron-browser-apt/releases/latest/download/netron-browser.deb<br>
+sudo dpkg -i netron-browser.deb</code>
+
+<h3 style="margin-top:1.5rem">Option 3: Run from source</h3>
+<code>git clone https://github.com/adamstrolest/netron-browser-site.git<br>
+cd netron-browser-site/src<br>
+sudo apt install python3-gi gir1.2-webkit2-4.1 gir1.2-gtk-3.0 gir1.2-pango-1.0 gir1.2-gdkpixbuf-2.0 gir1.2-notify-0.7 yt-dlp mpv<br>
+python3 netron.py</code>
+</div>
+
+<footer>
+<p>Netron Browser — MIT License. Made for potato computers everywhere.</p>
+</footer>
+</body>
+</html>
