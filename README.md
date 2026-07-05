@@ -36,4 +36,4 @@ sudo apt update && sudo apt install netron-browser
 
 ## License
 
-MIT
+GNU General Public License v3.0
